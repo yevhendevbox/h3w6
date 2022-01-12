@@ -7,21 +7,35 @@
     }
 
     toString() {
-      return 'Ox' + this.num.toString(16).toUpperCase();
+      return '0x' + this.num.toString(16).toUpperCase();
     }
     valueOf() {
       return this.num;
     }
     plus(entry) {
-
+      return new Hex(this.valueOf() + entry.valueOf());
     }
-    minus() {}
+    minus() {
+      return new Hex(this.valueOf() - entry.valueOf())
+    }
+
+    static parse(hexadecimal) {
+      if (hexadecimal[0] === '0') {
+        return parseInt(hexadecimal.replace('0x', ''), 16);
+      }
+      return parseInt(hexadecimal, 16);
+    }
   }
 
-const fancyHex = new Hex(255);
+const fancyHex = new Hex(10);
+const notSoFancyHex = new Hex(5);
+const test = 10;
 
 console.log(fancyHex.toString());
 console.log(fancyHex.valueOf() + 1);
+console.log(fancyHex.plus(notSoFancyHex).toString());
+console.log(fancyHex.parse('0xFF'));
+console.log(fancyHex.parse('FF'));
 // ========================================================================
 // Task 2 - Interactive dictionery Class
 // ========================================================================
@@ -95,4 +109,4 @@ class PaginationHelper {
   }
 }
 
-const helper = new PaginationHelper(['a','b','c','d','e','f','f'], 3);
+// const helper = new PaginationHelper(['a','b','c','d','e','f','f'], 3);
